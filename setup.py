@@ -30,7 +30,7 @@ setup(
     name='django-jet',
     version=__import__('jet').VERSION,
     description='Modern template for Django admin interface with improved functionality',
-    long_description=read('README.rst'),
+    long_description=read('README.md'),
     author='Denis Kildishev',
     author_email='support@jet.geex-arts.com',
     url='https://github.com/geex-arts/django-jet',
