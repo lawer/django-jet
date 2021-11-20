@@ -1,6 +1,6 @@
 require('es6-promise').polyfill();
 
-var gulp = require('gulp'),
+let gulp = require('gulp'),
     browserify = require('browserify'),
     concatCss = require('gulp-concat-css'),
     cleanCSS = require('gulp-clean-css'),
@@ -16,7 +16,7 @@ var gulp = require('gulp'),
     shell = require('gulp-shell'),
     replace = require('gulp-replace');
 
-var cssProcessors = [
+let cssProcessors = [
     autoprefixer(),
     pxtorem({
         rootValue: 14,
