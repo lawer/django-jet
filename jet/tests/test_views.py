@@ -225,3 +225,8 @@ class ViewsTestCase(TestCase):
 		response = json.loads(response.content.decode())
 		self.assertFalse(response['error'])
 		self.assertFalse(UserDashboardModule.objects.filter(pk=module.pk).exists())
+
+	def test_model_lookup_form(self):
+		response = self.admin.get(reverse('jet:model_lookup'))
+		data = json.loads(response.content.decode())
+		self.assertTrue(data['error'])
