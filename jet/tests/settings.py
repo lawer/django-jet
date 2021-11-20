@@ -25,34 +25,29 @@ INSTALLED_APPS = (
 	'jet.tests',
 )
 
-MIDDLEWARE = MIDDLEWARE_CLASSES = (
+MIDDLEWARE = [
 	'django.contrib.sessions.middleware.SessionMiddleware',
 	'django.middleware.common.CommonMiddleware',
 	'django.middleware.csrf.CsrfViewMiddleware',
 	'django.contrib.auth.middleware.AuthenticationMiddleware',
 	'django.contrib.messages.middleware.MessageMiddleware',
-)
+]
 
-if django.VERSION[:2] < (1, 9):
-	TEMPLATE_CONTEXT_PROCESSORS = tuple(global_settings.TEMPLATE_CONTEXT_PROCESSORS) + (
-		'django.core.context_processors.request',
-	)
-else:
-	TEMPLATES = [
-		{
-			'BACKEND': 'django.template.backends.django.DjangoTemplates',
-			'DIRS': [os.path.join(BASE_DIR, 'templates')],
-			'APP_DIRS': True,
-			'OPTIONS': {
-				'context_processors': (
-					'django.template.context_processors.debug',
-					'django.template.context_processors.request',
-					'django.contrib.auth.context_processors.auth',
-					'django.contrib.messages.context_processors.messages',
-				)
-			},
+TEMPLATES = [
+	{
+		'BACKEND': 'django.template.backends.django.DjangoTemplates',
+		'DIRS': [os.path.join(BASE_DIR, 'templates')],
+		'APP_DIRS': True,
+		'OPTIONS': {
+			'context_processors': (
+				'django.template.context_processors.debug',
+				'django.template.context_processors.request',
+				'django.contrib.auth.context_processors.auth',
+				'django.contrib.messages.context_processors.messages',
+			)
 		},
-	]
+	},
+]
 
 DATABASES = {
 	'default': {
