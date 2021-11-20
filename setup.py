@@ -1,5 +1,6 @@
 import os
-from setuptools import setup, find_packages
+
+from setuptools import find_packages, setup
 
 
 def read(fname):
@@ -31,9 +32,8 @@ setup(
     version=__import__('jet').VERSION,
     description='Modern template for Django admin interface with improved functionality',
     long_description=read('README.md'),
-    author='Denis Kildishev',
-    author_email='support@jet.geex-arts.com',
-    url='https://github.com/geex-arts/django-jet',
+    author='Onemind Services LLC',
+    url='https://github.com/Onemind-Services-LLC/django-jet',
     packages=find_packages(),
     license='AGPLv3',
     classifiers=[
@@ -45,11 +45,10 @@ setup(
         'Intended Audience :: System Administrators',
         'Operating System :: OS Independent',
         'Programming Language :: Python',
-        'Programming Language :: Python :: 2.6',
-        'Programming Language :: Python :: 2.7',
-        'Programming Language :: Python :: 3.2',
-        'Programming Language :: Python :: 3.3',
-        'Programming Language :: Python :: 3.4',
+        'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3.8',
+        'Programming Language :: Python :: 3.9',
+        'Programming Language :: Python :: 3.10',
         'Environment :: Web Environment',
         'Topic :: Software Development',
         'Topic :: Software Development :: User Interfaces',
