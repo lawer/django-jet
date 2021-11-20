@@ -123,10 +123,4 @@ gulp.task('locales', shell.task('python manage.py compilemessages', { quiet: tru
 
 gulp.task('build', gulp.series('scripts', 'styles', 'vendor-styles', 'vendor-translations', 'locales'));
 
-gulp.task('watch', function() {
-    gulp.watch('./jet/static/jet/js/src/**/*.js', ['scripts']);
-    gulp.watch('./jet/static/jet/css/**/*.scss', ['styles']);
-    gulp.watch(['./jet/locale/**/*.po', './jet/dashboard/locale/**/*.po'], ['locales']);
-});
-
-gulp.task('default', gulp.series('build', 'watch'));
+gulp.task('default', gulp.series('build'));

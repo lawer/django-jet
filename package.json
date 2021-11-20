@@ -22,8 +22,8 @@
     "perfect-scrollbar": "0.6.5-1",
     "postcss-pxtorem": "^6.0.0",
     "sass": "^1.43.4",
-    "select2": "^3.5.1",
-    "timepicker": "^1.13.18",
+    "select2": "^4.1.0-rc.0",
+    "timepicker": "git://github.com/geex-arts/timepicker",
     "vinyl-buffer": "^1.0.1",
     "vinyl-source-stream": "^2.0.0"
   },
