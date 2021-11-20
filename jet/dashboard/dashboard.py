@@ -114,7 +114,7 @@ class Dashboard(object):
 			module_models.append(UserDashboardModule.objects.create(
 				title=module.title,
 				app_label=self.app_label,
-				user=user.pk,
+				user=user,
 				module=module.fullname(),
 				column=column,
 				order=order,
@@ -128,7 +128,7 @@ class Dashboard(object):
 	def load_modules(self):
 		module_models = UserDashboardModule.objects.filter(
 			app_label=self.app_label,
-			user=self.context['request'].user.pk
+			user=self.context['request'].user
 		).all()
 
 		if not module_models.exists():

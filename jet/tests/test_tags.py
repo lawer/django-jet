@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.models import AnonymousUser
+from django.contrib.auth import get_user_model
 from django.test import TestCase
 from django.test.client import RequestFactory
 from django.urls import reverse
@@ -58,3 +58,57 @@ class TagsTestCase(TestCase):
 		choices = [choice for choice in field.field.choices]
 
 		self.assertEqual(len(choices), len(self.models) + 1)
+
+	def test_jet_sibling_object_next_url(self):
+		instance = self.models[0]
+		ordering_field = 1  # field1 in list_display
+		preserved_filters = '_changelist_filters=o%%3D%d' % ordering_field
+
+		expected_url = reverse('admin:%s_%s_change' % (
+			TestModel._meta.app_label,
+			TestModel._meta.model_name
+		), args=(self.models[1].pk,)) + '?' + preserved_filters
+
+		user = get_user_model().objects.create_user(
+			username='admin',
+			password='passadmin'
+		)
+
+		request = RequestFactory().get(expected_url)
+		request.user = user
+		context = {
+			'original': instance,
+			'preserved_filters': preserved_filters,
+			'request': request,
+		}
+
+		actual_url = jet_next_object(context)['url']
+
+		self.assertEqual(actual_url, expected_url)
+
+	def test_jet_sibling_object_previous_url(self):
+		instance = self.models[0]
+		ordering_field = 1  # field1 in list_display
+		preserved_filters = '_changelist_filters=o%%3D%d' % ordering_field
+
+		changelist_url = reverse('admin:%s_%s_change' % (
+			TestModel._meta.app_label,
+			TestModel._meta.model_name
+		), args=(self.models[1].pk,)) + '?' + preserved_filters
+
+		user = get_user_model().objects.create_user(
+			username='admin',
+			password='passadmin'
+		)
+		request = RequestFactory().get(changelist_url)
+		request.user = user
+		context = {
+			'original': instance,
+			'preserved_filters': preserved_filters,
+			'request': request,
+		}
+
+		previous_object = jet_previous_object(context)
+		expected_object = None
+
+		self.assertEqual(previous_object, expected_object)

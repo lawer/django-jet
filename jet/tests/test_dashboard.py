@@ -30,7 +30,7 @@ class DashboardTestCase(TestCase):
 			title='',
 			module='jet.dashboard.modules.LinkList',
 			app_label=None,
-			user=self.admin_user.pk,
+			user=self.admin_user,
 			column=0,
 			order=0
 		)
@@ -38,7 +38,7 @@ class DashboardTestCase(TestCase):
 			title='',
 			module='jet.dashboard.modules.RecentActions',
 			app_label=None,
-			user=self.admin_user.pk,
+			user=self.admin_user,
 			column=0,
 			order=1
 		)
