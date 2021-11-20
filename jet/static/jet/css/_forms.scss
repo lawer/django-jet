@@ -156,6 +156,11 @@ input[type=checkbox] {
   &:checked + label:before {
     content: $icon-checkbox;
   }
+
+	&:after {
+		content: '*';
+		color: $error-text-color;
+	}
 }
 
 /* SELECTOR */
