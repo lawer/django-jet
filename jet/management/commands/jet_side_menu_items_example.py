@@ -1,53 +1,50 @@
-try:
-    from django.core.management.base import NoArgsCommand
-except ImportError:
-    from django.core.management import BaseCommand as NoArgsCommand
+from django.core.management import BaseCommand as NoArgsCommand, CommandError
 
-from jet.utils import get_app_list, get_original_menu_items
+from jet.utils import get_original_menu_items
 
 
 class Command(NoArgsCommand):
-    help = 'Generates example of JET custom apps setting'
-    item_order = 0
-    
-    def handle(self, *args, **options):
-        if args:
-            raise CommandError("Command doesn't accept any arguments")
-        return self.handle_noargs(**options)
-    
-    def handle_noargs(self, **options):
-        class User:
-            is_active = True
-            is_staff = True
-            is_superuser = True
+	help = 'Generates example of JET custom apps setting'
+	item_order = 0
 
-            def has_module_perms(self, app):
-                return True
+	def handle(self, *args, **options):
+		if args:
+			raise CommandError("Command doesn't accept any arguments")
+		return self.handle_noargs(**options)
 
-            def has_perm(self, object):
-                return True
+	def handle_noargs(self, **options):
+		class User:
+			is_active = True
+			is_staff = True
+			is_superuser = True
 
-        class Request:
-            user = User()
+			def has_module_perms(self, app):
+				return True
 
-        app_list = get_original_menu_items({
-            'request': Request(),
-            'user': None
-        })
+			def has_perm(self, object):
+				return True
 
-        self.stdout.write('# Add this to your settings.py to customize applications and models list')
-        self.stdout.write('JET_SIDE_MENU_ITEMS = [')
+		class Request:
+			user = User()
 
-        for app in app_list:
-            self.stdout.write('    {\'app_label\': \'%s\', \'items\': [' % (
-                app['app_label']
-            ))
+		app_list = get_original_menu_items({
+			'request': Request(),
+			'user': None
+		})
 
-            for model in app['models']:
-                self.stdout.write('        {\'name\': \'%s\'},' % (
-                    model['name']
-                ))
+		self.stdout.write('# Add this to your settings.py to customize applications and models list')
+		self.stdout.write('JET_SIDE_MENU_ITEMS = [')
 
-            self.stdout.write('    ]},')
+		for app in app_list:
+			self.stdout.write('    {\'app_label\': \'%s\', \'items\': [' % (
+				app['app_label']
+			))
 
-        self.stdout.write(']')
+			for model in app['models']:
+				self.stdout.write('        {\'name\': \'%s\'},' % (
+					model['name']
+				))
+
+			self.stdout.write('    ]},')
+
+		self.stdout.write(']')
