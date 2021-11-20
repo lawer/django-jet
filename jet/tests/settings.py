@@ -61,7 +61,7 @@ DATABASES = {
 }
 
 TIME_ZONE = 'UTC'
-LANGUAGE_CODE = 'en-US'
+LANGUAGE_CODE = 'en-uS'
 USE_I18N = True
 USE_L10N = True
 
@@ -72,3 +72,5 @@ STATIC_URL = '/static/'
 
 JET_INDEX_DASHBOARD = 'jet.tests.dashboard.TestIndexDashboard'
 JET_APP_INDEX_DASHBOARD = 'jet.tests.dashboard.TestAppIndexDashboard'
+
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
