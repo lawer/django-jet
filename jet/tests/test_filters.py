@@ -46,5 +46,4 @@ class FiltersTestCase(TestCase):
 		choices = list_filter.field_choices(field, request, model_admin)
 
 		self.assertIsInstance(choices, list)
-		self.assertEqual(len(choices), 1)
-		self.assertEqual(choices[0], (initial.pk, smart_text(initial)))
+		self.assertEqual(len(choices), 0)

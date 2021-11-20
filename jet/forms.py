@@ -32,7 +32,7 @@ class AddBookmarkForm(forms.ModelForm):
 		return data
 
 	def save(self, commit=True):
-		self.instance.user = self.request.user.pk
+		self.instance.user = self.request.user
 		return super(AddBookmarkForm, self).save(commit)
 
 
@@ -49,7 +49,7 @@ class RemoveBookmarkForm(forms.ModelForm):
 		data = super(RemoveBookmarkForm, self).clean()
 		if not user_is_authenticated(self.request.user) or not self.request.user.is_staff:
 			raise ValidationError('error')
-		if self.instance.user != self.request.user.pk:
+		if self.instance.user != self.request.user:
 			raise ValidationError('error')
 		return data
 
@@ -78,14 +78,14 @@ class ToggleApplicationPinForm(forms.ModelForm):
 			try:
 				pinned_app = PinnedApplication.objects.get(
 					app_label=self.cleaned_data['app_label'],
-					user=self.request.user.pk
+					user=self.request.user
 				)
 				pinned_app.delete()
 				return False
 			except PinnedApplication.DoesNotExist:
 				PinnedApplication.objects.create(
 					app_label=self.cleaned_data['app_label'],
-					user=self.request.user.pk
+					user=self.request.user
 				)
 				return True
 
@@ -96,7 +96,7 @@ class ModelLookupForm(forms.Form):
 	q = forms.CharField(required=False)
 	page = forms.IntegerField(required=False)
 	page_size = forms.IntegerField(required=False, min_value=1, max_value=1000)
-	object_id = forms.IntegerField(required=False)
+	object_id = forms.CharField(required=False)
 	model_cls = None
 
 	def __init__(self, request, *args, **kwargs):
@@ -139,10 +139,19 @@ class ModelLookupForm(forms.Form):
 		page = self.cleaned_data['page'] or 1
 		offset = (page - 1) * limit
 
+		if page == 1:
+			limit -= 1
+		else:
+			offset -= 1
+
 		items = list(map(
 			lambda instance: {'id': instance.pk, 'text': get_model_instance_label(instance)},
 			qs.all()[offset:offset + limit]
 		))
-		total = qs.count()
+
+		if page == 1:
+			items.insert(0, {'id': '', 'text': '---------'})
+
+		total = qs.count() + 1
 
 		return items, total

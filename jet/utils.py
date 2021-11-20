@@ -14,7 +14,7 @@ from django.utils import translation
 from django.utils.encoding import force_text, smart_text
 from django.utils.functional import Promise
 from django.utils.text import capfirst, slugify
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from jet import settings
 from jet.models import PinnedApplication
@@ -66,7 +66,7 @@ def get_app_list(context, order=True):
 					'perms': perms,
 					'model_name': model._meta.model_name
 				}
-				if perms.get('change', False):
+				if perms.get('change', False) or perms.get('view', False):
 					try:
 						model_dict['admin_url'] = reverse('admin:%s_%s_changelist' % info, current_app=admin_site.name)
 					except NoReverseMatch:
@@ -209,12 +209,8 @@ def get_model_queryset(admin_site, model, request, preserved_filters=None):
 		model_admin.list_per_page, model_admin.list_max_show_all,
 		model_admin.list_editable, model_admin]
 
-	try:
-		sortable_by = model_admin.get_sortable_by(request)
-		change_list_args.append(sortable_by)
-	except AttributeError:
-		# django version < 2.1
-		pass
+	sortable_by = model_admin.get_sortable_by(request)
+	change_list_args.append(sortable_by)
 
 	try:
 		cl = ChangeList(*change_list_args)

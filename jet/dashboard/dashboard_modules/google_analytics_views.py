@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.http import HttpResponse
 from django.shortcuts import redirect
 from django.urls import reverse
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from httplib2 import ServerNotFoundError
 from oauth2client.client import FlowExchangeError
 

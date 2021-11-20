@@ -3,7 +3,7 @@ from importlib import import_module
 from django.template.context_processors import csrf
 from django.template.loader import render_to_string
 from django.urls import reverse
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from jet.dashboard import modules
 from jet.dashboard.models import UserDashboardModule
@@ -59,7 +59,7 @@ class Dashboard(object):
 
 		.. code-block:: python
 
-				from django.utils.translation import ugettext_lazy as _
+				from django.utils.translation import gettext_lazy as _
 				from jet.dashboard import modules
 				from jet.dashboard.dashboard import Dashboard, AppIndexDashboard
 
@@ -114,7 +114,7 @@ class Dashboard(object):
 			module_models.append(UserDashboardModule.objects.create(
 				title=module.title,
 				app_label=self.app_label,
-				user=user.pk,
+				user=user,
 				module=module.fullname(),
 				column=column,
 				order=order,
@@ -128,10 +128,10 @@ class Dashboard(object):
 	def load_modules(self):
 		module_models = UserDashboardModule.objects.filter(
 			app_label=self.app_label,
-			user=self.context['request'].user.pk
+			user=self.context['request'].user
 		).all()
 
-		if len(module_models) == 0:
+		if not module_models.exists():
 			module_models = self.create_initial_module_models(self.context['request'].user)
 
 		loaded_modules = []

@@ -176,9 +176,9 @@ You should import this file before dashboard urls have been imported in you main
         from core import dashboard_modules_views
 
         urlpatterns = [
-            url(r'^admin/', include(admin.site.urls)),
-            url(r'^jet/', include('jet.urls', 'jet')),
-            url(r'^jet/dashboard/', include('jet.dashboard.urls', 'jet-dashboard')),
+            path(r'^admin/', include(admin.site.urls)),
+            path(r'^jet/', include('jet.urls', 'jet')),
+            path(r'^jet/dashboard/', include('jet.dashboard.urls', 'jet-dashboard')),
             ...
         ]
 

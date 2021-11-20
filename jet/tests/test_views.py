@@ -29,7 +29,7 @@ class ViewsTestCase(TestCase):
 			title=title,
 			module='jet.dashboard.modules.LinkList',
 			app_label=None,
-			user=self.admin_user.pk,
+			user=self.admin_user,
 			column=0,
 			order=0,
 			settings='{"layout": "inline"}',
@@ -92,7 +92,7 @@ class ViewsTestCase(TestCase):
 	def test_remove_bookmark_view(self):
 		url = 'http://test.com/'
 		title = 'Title'
-		bookmark = Bookmark.objects.create(url=url, title=title, user=self.admin_user.pk)
+		bookmark = Bookmark.objects.create(url=url, title=title, user=self.admin_user)
 		response = self.admin.post(reverse('jet:remove_bookmark'), {'id': bookmark.id})
 		self.assertEqual(response.status_code, 200)
 		response = json.loads(response.content.decode())
@@ -120,7 +120,7 @@ class ViewsTestCase(TestCase):
 			title='',
 			module='jet.dashboard.modules.LinkList',
 			app_label=app_label,
-			user=self.admin_user.pk,
+			user=self.admin_user,
 			column=0,
 			order=0
 		)
@@ -128,7 +128,7 @@ class ViewsTestCase(TestCase):
 			title='',
 			module='jet.dashboard.modules.LinkList',
 			app_label=app_label,
-			user=self.admin_user.pk,
+			user=self.admin_user,
 			column=0,
 			order=1
 		)
@@ -188,7 +188,7 @@ class ViewsTestCase(TestCase):
 			title='',
 			module='jet.dashboard.modules.LinkList',
 			app_label=None,
-			user=self.admin_user.pk,
+			user=self.admin_user,
 			column=0,
 			order=0
 		)
@@ -216,7 +216,7 @@ class ViewsTestCase(TestCase):
 			title='',
 			module='jet.dashboard.modules.LinkList',
 			app_label=None,
-			user=self.admin_user.pk,
+			user=self.admin_user,
 			column=0,
 			order=0
 		)
@@ -225,3 +225,8 @@ class ViewsTestCase(TestCase):
 		response = json.loads(response.content.decode())
 		self.assertFalse(response['error'])
 		self.assertFalse(UserDashboardModule.objects.filter(pk=module.pk).exists())
+
+	def test_model_lookup_form(self):
+		response = self.admin.get(reverse('jet:model_lookup'))
+		data = json.loads(response.content.decode())
+		self.assertTrue(data['error'])

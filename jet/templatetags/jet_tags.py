@@ -1,3 +1,5 @@
+from __future__ import unicode_literals
+
 import json
 import os
 from urllib.parse import parse_qsl
@@ -43,7 +45,7 @@ def jet_get_menu(context):
 def jet_get_bookmarks(user):
 	if user is None:
 		return None
-	return Bookmark.objects.filter(user=user.pk)
+	return Bookmark.objects.filter(user=user)
 
 
 @register.filter
