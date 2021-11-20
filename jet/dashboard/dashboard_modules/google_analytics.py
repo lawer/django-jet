@@ -13,7 +13,7 @@ from django.utils.encoding import force_text, force_text as force_unicode
 from django.utils.html import format_html
 from django.utils.safestring import mark_safe
 from django.utils.text import capfirst
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from googleapiclient.discovery import build
 from oauth2client.client import AccessTokenRefreshError, OAuth2Credentials, Storage, flow_from_clientsecrets
 

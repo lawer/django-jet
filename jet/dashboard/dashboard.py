@@ -3,7 +3,7 @@ from importlib import import_module
 from django.template.context_processors import csrf
 from django.template.loader import render_to_string
 from django.urls import reverse
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from jet.dashboard import modules
 from jet.dashboard.models import UserDashboardModule
@@ -59,7 +59,7 @@ class Dashboard(object):
 
 		.. code-block:: python
 
-				from django.utils.translation import ugettext_lazy as _
+				from django.utils.translation import gettext_lazy as _
 				from jet.dashboard import modules
 				from jet.dashboard.dashboard import Dashboard, AppIndexDashboard
 
