@@ -33,4 +33,3 @@ jobs:
           commit-msg: "[skip ci] Updated CODEOWNERS"
           file-path: ".github/CODEOWNERS"
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          branch: dev
