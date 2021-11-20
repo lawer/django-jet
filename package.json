@@ -25,5 +25,10 @@
     "timepicker": "^1.13.18",
     "vinyl-buffer": "^1.0.1",
     "vinyl-source-stream": "^2.0.0"
+  },
+  "scripts":{
+    "watch": "gulp watch",
+    "build": "gulp build",
+    "dev": "gulp default"
   }
 }
