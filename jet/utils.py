@@ -11,7 +11,8 @@ from django.http import HttpResponse
 from django.template import Context
 from django.urls import NoReverseMatch, resolve, reverse
 from django.utils import translation
-from django.utils.encoding import force_text, smart_text
+from django.utils.encoding import smart_str as smart_text
+from django.utils.encoding import force_str as force_text
 from django.utils.functional import Promise
 from django.utils.text import capfirst, slugify
 from django.utils.translation import gettext_lazy as _
