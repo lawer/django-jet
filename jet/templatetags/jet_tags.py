@@ -8,7 +8,7 @@ from django import template
 from django.contrib.admin.widgets import RelatedFieldWidgetWrapper
 from django.forms import CheckboxInput, ModelChoiceField, ModelMultipleChoiceField, Select, SelectMultiple
 from django.urls import reverse
-from django.utils.encoding import smart_text
+from django.utils.encoding import smart_str as smart_text
 from django.utils.formats import get_format
 from django.utils.safestring import mark_safe
 
