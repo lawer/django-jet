@@ -33,7 +33,7 @@ setup(
     description='Modern template for Django admin interface with improved functionality',
     long_description=read('README.md'),
     author='Onemind Services LLC',
-    url='https://github.com/Onemind-Services-LLC/django-jet',
+    url='https://github.com/lawer/django-jet.git',
     packages=find_packages(),
     license='AGPLv3',
     classifiers=[
